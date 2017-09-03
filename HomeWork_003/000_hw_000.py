@@ -59,7 +59,6 @@ def main():
     is_first_loop = True
     while True:
         if(not is_first_loop):
-            is_first_loop = False
             user_responce = None
             while user_responce not in ('y', 'n'):
                 user_responce = input('Ещё раз?(y/n) ').lower()
@@ -75,7 +74,7 @@ def main():
             elif(check_result == -2):
                 print(f"[{data[1]}] - это не число")
             elif(check_result == -3):
-                print(f'[{operator}] - это недопустимый оператор')
+                print(f'[{data[2]}] - это недопустимый оператор')
 
         n1 = int(data[0])
         n2 = int(data[1])
