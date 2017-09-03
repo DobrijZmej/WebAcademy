@@ -51,9 +51,9 @@ def do_action(n1, n2, operator):
     if(operator == '/'):
         return div(n1, n2)
     if(operator == 'sin'):
-        return sin(n1, n2)
+        return (sin(n1), sin(n2))
     if(operator == 'cos'):
-        return cos(n1, n2)
+        return (cos(n1), cos(n2))
 
 def main():
     is_first_loop = True
