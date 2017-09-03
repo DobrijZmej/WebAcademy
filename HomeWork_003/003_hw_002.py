@@ -1,5 +1,5 @@
 def check_data(in_data):
-    if(in_data.isdigit()):
+    if in_data.isdigit():
         return True
     return False
 
@@ -13,7 +13,7 @@ def main():
     prime_counter = 0
     current_number = 1
     while prime_counter < 10:
-        if(is_prime(current_number) == 0):
+        if is_prime(current_number) == 0:
             print(f'{current_number} это простое число номер {prime_counter+1}')
             prime_counter += 1
         current_number += 1

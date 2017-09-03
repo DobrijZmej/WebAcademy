@@ -1,5 +1,5 @@
 def check_data(in_data):
-    if(in_data.isdigit()):
+    if in_data.isdigit():
         return True
     return False
 
@@ -11,7 +11,7 @@ def is_prime(in_number):
 
 def main():
     data = input('Введите число: ')
-    if(check_data(data)):
+    if check_data(data):
         data = int(data)
         result = is_prime(data)
         if result == 0:
