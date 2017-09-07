@@ -9,7 +9,7 @@ def print_list(in_lists):
     col_sizes = []
     for one_list in in_lists:
         for i, val in enumerate(one_list):
-            if(len(col_sizes) <= i):
+            if len(col_sizes) <= i:
                 col_sizes.append(0)
             col_sizes[i] = max(col_sizes[i], len(str(val)))
     #print(col_sizes)
@@ -40,7 +40,7 @@ def get_max_row(in_lists):
     max_row = None
     max_value = -1
     for i, val in enumerate(row_sum):
-        if(val > max_value):
+        if val > max_value:
             max_row = i
             max_value = val
     #print(row_sum)
