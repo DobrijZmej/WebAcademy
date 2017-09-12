@@ -1,0 +1,151 @@
+{
+  "id": 1499,
+  "created_at": 1466612947,
+  "updated_at": 1487106051,
+  "name": "42 Aquilae A 6",
+  "system_id": 205,
+  "group_id": 6,
+  "group_name": "Planet",
+  "type_id": 30,
+  "type_name": "High metal content world",
+  "distance_to_arrival": 4648,
+  "full_spectral_class": null,
+  "spectral_class": null,
+  "spectral_sub_class": null,
+  "luminosity_class": null,
+  "luminosity_sub_class": null,
+  "surface_temperature": 171,
+  "is_main_star": null,
+  "age": null,
+  "solar_masses": null,
+  "solar_radius": null,
+  "catalogue_gliese_id": null,
+  "catalogue_hipp_id": null,
+  "catalogue_hd_id": null,
+  "volcanism_type_id": 8,
+  "volcanism_type_name": "Silicate vapour geysers",
+  "atmosphere_type_id": 13,
+  "atmosphere_type_name": "Nitrogen",
+  "terraforming_state_id": 1,
+  "terraforming_state_name": "Not terraformable",
+  "earth_masses": 7.2474,
+  "radius": 10617,
+  "gravity": 2.6155,
+  "surface_pressure": 7.42,
+  "orbital_period": 8653.1,
+  "semi_major_axis": 8.92,
+  "orbital_eccentricity": 0.0451,
+  "orbital_inclination": -4.58,
+  "arg_of_periapsis": 71.24,
+  "rotational_period": 1.8,
+  "is_rotational_period_tidally_locked": false,
+  "axis_tilt": 17.82,
+  "eg_id": 1809,
+  "belt_moon_masses": null,
+  "ring_type_id": null,
+  "ring_type_name": null,
+  "ring_mass": null,
+  "ring_inner_radius": null,
+  "ring_outer_radius": null,
+  "rings": [
+    {
+      "id": 5294,
+      "created_at": 1466613629,
+      "updated_at": 1487106051,
+      "name": "42 AQUILAE A 6 A Ring",
+      "semi_major_axis": 0,
+      "ring_type_id": 2,
+      "ring_mass": 15406587,
+      "ring_inner_radius": 20712,
+      "ring_outer_radius": 67371,
+      "ring_type_name": "Metal Rich"
+    }
+  ],
+  "atmosphere_composition": [
+    {
+      "atmosphere_component_id": 9,
+      "share": 91.6,
+      "atmosphere_component_name": "Nitrogen"
+    },
+    {
+      "atmosphere_component_id": 10,
+      "share": 7.1,
+      "atmosphere_component_name": "Oxygen"
+    },
+    {
+      "atmosphere_component_id": 5,
+      "share": 1.3,
+      "atmosphere_component_name": "Helium"
+    }
+  ],
+  "solid_composition": [
+    {
+      "solid_component_id": 3,
+      "share": 67.8,
+      "solid_component_name": "Rock"
+    },
+    {
+      "solid_component_id": 2,
+      "share": 32.2,
+      "solid_component_name": "Metal"
+    }
+  ],
+  "materials": [
+   {
+      "material_id": 1,
+      "material_name": "Carbon",
+      "share": 12.6
+    },
+    {
+      "material_id": 2,
+      "material_name": "Iron",
+      "share": 21
+    },
+    {
+      "material_id": 3,
+      "material_name": "Nickel",
+      "share": 15.9
+    },
+    {
+      "material_id": 4,
+      "material_name": "Phosphorus",
+      "share": 8.1
+    },
+    {
+      "material_id": 5,
+      "material_name": "Sulphur",
+      "share": 15
+    },
+    {
+      "material_id": 7,
+      "material_name": "Chromium",
+      "share": 9.4
+    },
+    {
+      "material_id": 9,
+      "material_name": "Manganese",
+      "share": 8.7
+    },
+    {
+      "material_id": 11,
+      "material_name": "Vanadium",
+      "share": 5.1
+    },
+    {
+      "material_id": 14,
+      "material_name": "Cadmium",
+      "share": 1.6
+    },
+    {
+      "material_id": 16,
+      "material_name": "Molybdenum",
+      "share": 1.4
+    },
+    {
+      "material_id": 24,
+      "material_name": "Tellurium",
+      "share": 1.1
+    }    
+  ],
+  "is_landable": false
+}

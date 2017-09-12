@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "name": "39 b Draconis One",
+  "updated_at": 1496091138,
+  "government_id": 80,
+  "government": "Cooperative",
+  "allegiance_id": 4,
+  "allegiance": "Independent",
+  "state_id": 16,
+  "state": "Boom",
+  "home_system_id": 185,
+  "is_player_faction": false
+}

@@ -6,7 +6,7 @@ while True:
 
     if(not n1.isdigit()):
         print(f'[{n1}] - это не число')
-        exit(0)
+        break #exit(0)
 
     if(not n2.isdigit()):
         print(f'[{n2}] - это не число')
