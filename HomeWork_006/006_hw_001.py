@@ -75,7 +75,7 @@ def main():
 
     print('')
     car4 = Car('Subaru', 2016, 8000, 'Gray')
-    if(show_room.is_car_exists(car4)):
+    if show_room.is_car_exists(car4):
         print(f'Машина [{car4}] доступна для продажи')
     else:
         print(f'Машина [{car4}] на текущий момент отсутствует, необходим предзаказ')
