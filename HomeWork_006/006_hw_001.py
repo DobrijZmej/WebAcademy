@@ -30,7 +30,7 @@ class ShowRoom:
         self.cars.append(in_car)
 
     def buy_car(self, in_car):
-        if(in_car in self.cars):
+        if in_car in self.cars:
             self.cars.remove(in_car)
         else:
             raise CarNotFoundError('Требуемая машина не найдена в салоне, для продажи необходимо выполнить предзаказ.')
