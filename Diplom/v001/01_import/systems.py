@@ -18,7 +18,9 @@ class ImportSystems(BaseClases.BaseCsv):
     def file_download(self):
         temp_file_name = os.path.join('temp', self.file_url.split('/')[-1])
         self.temp_file_name = temp_file_name
-        print(f'Start downloading from [{self.file_url}] to [{temp_file_name}]')
+        print(f'Start downloading from '
+              f'[{self.file_url}] to '
+              f'[{temp_file_name}]')
         url_size = request.urlopen(self.file_url).info()["Content-Length"]
         print(f'File size on link: {url_size}')
         file_size = 0
@@ -44,8 +46,8 @@ class ImportSystems(BaseClases.BaseCsv):
         return self.file_handler.readline()
 
     def parse_line_csv(self, in_line):
-        #print(in_line)
-        #print(in_line.split(','))
+        # print(in_line)
+        # print(in_line.split(','))
         line_data = in_line.split(',')
         result = {}
         for i, key in enumerate(self.headers):
@@ -63,19 +65,16 @@ class ImportSystems(BaseClases.BaseCsv):
         self.session.commit()
 
     def show_progress(self, in_line_size):
-        #if self.completed_size != 0:
-        #    print('\r', end='', flush=True)
+        # if self.completed_size != 0:
+        #     print('\r', end='', flush=True)
         self.completed_size += in_line_size
         progress = round(self.completed_size / self.file_size * 100, 6)
         print(f'loaded {progress}%\r', end='', flush=True)
 
 
-
-
-
 if __name__ == '__main__':
     iss = ImportSystems('https://eddb.io/archive/v5/systems.csv')
-    #iss.execute('select 1')
+    # iss.execute('select 1')
     iss.file_download()
     if not iss.is_need_process:
         headers = iss.read_line().strip()
@@ -86,7 +85,7 @@ if __name__ == '__main__':
                 break
             iss.show_progress(len(line))
             line = line.strip()
-            #print(line)
+            # print(line)
             system_dict = iss.parse_line_csv(line)
             iss.put_to_db(system_dict)
-            #print(iss.read_line())
+            # print(iss.read_line())

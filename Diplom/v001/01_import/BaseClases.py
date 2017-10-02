@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 import os
 import json
 
+
 class BaseImport:
     """
     Базовый класс загрузки и импорта файлов
@@ -17,9 +18,14 @@ class BaseImport:
         self.file_url = in_url
         if os.path.isfile('config.json'):
             with open('config.json') as f_config:
-                self.config = json.parse(read(f_config))
-        self.db = sqlalchemy.create_engine(f'postgresql://{self.config["user"]}:{self.config["password"]}@{self.config["server"]}/{self.config["database"]}')
-        self.session =Session(bind=self.db)
+                self.config = json.load(f_config)
+        self.db = sqlalchemy.create_engine(
+            f'postgresql://'
+            f'{self.config["user"]}:'
+            f'{self.config["password"]}@'
+            f'{self.config["server"]}/'
+            f'{self.config["database"]}')
+        self.session = Session(bind=self.db)
         if not os.path.exists('temp'):
             os.makedirs('temp')
 
@@ -40,6 +46,7 @@ class BaseCsv(BaseImport):
         Считываем строку из файла и загружаем в ORM
         """
         pass
+
 
 class BaseJson(BaseImport):
     """
