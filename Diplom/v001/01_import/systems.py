@@ -15,6 +15,10 @@ class System(Base):
 
 
 class ImportSystems(BaseClases.BaseCsv):
+    def __del__(self):
+        if self.file_handler:
+            self.file_handler.close()
+
     def file_download(self):
         temp_file_name = os.path.join('temp', self.file_url.split('/')[-1])
         self.temp_file_name = temp_file_name
@@ -81,7 +85,7 @@ if __name__ == '__main__':
         iss.read_headers(headers)
         while True:
             line = iss.read_line()
-            if(line == ''):
+            if not line:
                 break
             iss.show_progress(len(line))
             line = line.strip()
