@@ -1,6 +1,7 @@
 import sqlalchemy
 from sqlalchemy.orm import Session
 import os
+import json
 
 class BaseImport:
     """
@@ -14,9 +15,11 @@ class BaseImport:
         :param in_url: адрес к файлу, который необходимо загрузить
         """
         self.file_url = in_url
-        self.db = sqlalchemy.create_engine('postgresql://ueddb:7014258@localhost/eddb')
+        if os.path.isfile('config.json'):
+            with open('config.json') as f_config:
+                self.config = json.parse(read(f_config))
+        self.db = sqlalchemy.create_engine(f'postgresql://{self.config["user"]}:{self.config["password"]}@{self.config["server"]}/{self.config["database"]}')
         self.session =Session(bind=self.db)
-        #self.db = psycopg2.connect(dbname='eddb', user='ueddb', password='7014258')
         if not os.path.exists('temp'):
             os.makedirs('temp')
 
