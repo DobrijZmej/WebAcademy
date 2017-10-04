@@ -1,9 +1,11 @@
 import BaseClases
 from urllib import request
 import os
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
+
+import csv
 
 
 class System(Base):
@@ -12,6 +14,25 @@ class System(Base):
     id = Column(Integer, primary_key=True)
     EDSM_ID = Column(Integer)
     NAME = Column(String)
+    x = Column(Float)
+    y = Column(Float)
+    z = Column(Float)
+    POPULATION = Column(Integer)
+    IS_POPULATED = Column(Boolean)
+    GOVERNMENT_ID = Column(Integer)
+    ALLEGIANCE_ID = Column(Integer)
+    STATE_ID = Column(Integer)
+    SECURITY_ID = Column(Integer)
+    PRIMARY_ECONOMY_ID = Column(Integer)
+    POWER = Column(String)
+    POWER_STATE_ID = Column(Integer)
+    NEEDS_PERMIT = Column(Boolean)
+    UPDATED_AT = Column(DateTime)
+    SIMBAD_REF = Column(String)
+    CONTROLLING_MIN_FACT_ID = Column(Integer)
+    RESERVE_TYPE_ID = Column(Integer)
+    NAME_UPPER = Column(String)
+
 
 
 class ImportSystems(BaseClases.BaseCsv):
@@ -47,7 +68,9 @@ class ImportSystems(BaseClases.BaseCsv):
     def read_line(self):
         if not self.file_handler:
             self.file_handler = open(self.temp_file_name)
-        return self.file_handler.readline()
+            self.reader = csv.DictReader(self.file_handler)
+        return next(self.reader)
+        # return self.file_handler.readline()
 
     def parse_line_csv(self, in_line):
         # print(in_line)
@@ -60,9 +83,29 @@ class ImportSystems(BaseClases.BaseCsv):
 
     def put_to_db(self, in_dict):
         system = System(
-            id=in_dict['id'],
-            EDSM_ID=in_dict['edsm_id'],
+            id=int(in_dict['id']),
+            EDSM_ID=int(in_dict['edsm_id']),
             NAME=in_dict['name'].strip('"'),
+            x=float(in_dict['x']),
+            y=float(in_dict['y']),
+            z=float(in_dict['z']),
+            POPULATION=int(in_dict['population']),
+            IS_POPULATED=bool(in_dict['is_populated']),
+            GOVERNMENT_ID=int(in_dict['government_id']),
+            ALLEGIANCE_ID=int(in_dict['allegiance_id']),
+            STATE_ID=int(in_dict['state_id']),
+            SECURITY_ID=int(in_dict['security_id']),
+            PRIMARY_ECONOMY_ID=int(in_dict['primary_economy_id']),
+            POWER=in_dict['power'].strip('"'),
+            POWER_STATE_ID=int(in_dict['power_state_id']),
+            NEEDS_PERMIT = bool(in_dict['needs_permit']),
+
+        UPDATED_AT = Column(DateTime)
+        SIMBAD_REF = Column(String)
+        CONTROLLING_MIN_FACT_ID = Column(Integer)
+        RESERVE_TYPE_ID = Column(Integer)
+        NAME_UPPER = Column(String)
+
         )
         Base.metadata.create_all(self.db)
         self.session.merge(system)
@@ -81,15 +124,28 @@ if __name__ == '__main__':
     # iss.execute('select 1')
     iss.file_download()
     if not iss.is_need_process:
-        headers = iss.read_line().strip()
-        iss.read_headers(headers)
-        while True:
-            line = iss.read_line()
-            if not line:
-                break
-            iss.show_progress(len(line))
-            line = line.strip()
+        i = 0
+        line = '-'
+        while line:
+        #for line in iss.read_line():
+            line  = iss.read_line()
             # print(line)
-            system_dict = iss.parse_line_csv(line)
-            iss.put_to_db(system_dict)
-            # print(iss.read_line())
+            iss.put_to_db(line)
+            print(f'{i} lines imported...', end='\r')
+            i += 1
+
+
+
+        # headers = iss.read_line().strip()
+        # iss.read_headers(headers)
+        # while True:
+        #     line = iss.read_line()
+            # print(line)
+            # if not line:
+            #     break
+            # iss.show_progress(len(line))
+            # line = line.strip()
+            # # print(line)
+            # system_dict = iss.parse_line_csv(line)
+            # iss.put_to_db(line)
+            # # print(iss.read_line())
