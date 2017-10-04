@@ -4,6 +4,8 @@ import os
 from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
+import logging
+logging.basicConfig(format = u'%(levelname)-8s [%(asctime)s] %(message)s', level = logging.DEBUG, filename = u'mylog.log')
 
 import csv
 
@@ -43,23 +45,23 @@ class ImportSystems(BaseClases.BaseCsv):
     def file_download(self):
         temp_file_name = os.path.join('temp', self.file_url.split('/')[-1])
         self.temp_file_name = temp_file_name
-        print(f'Start downloading from '
+        logging.debug(f'Start downloading from '
               f'[{self.file_url}] to '
               f'[{temp_file_name}]')
         url_size = request.urlopen(self.file_url).info()["Content-Length"]
-        print(f'File size on link: {url_size}')
+        logging.debug(f'File size on link: {url_size}')
         file_size = 0
         if os.path.isfile(temp_file_name):
             file_size = os.stat(temp_file_name).st_size
-        print(f'File size on temp directory: {file_size}')
+        logging.debug(f'File size on temp directory: {file_size}')
         self.is_need_process = True
         self.file_size = int(file_size)
         self.completed_size = 0
         if int(file_size) != int(url_size):
             request.urlretrieve(self.file_url, temp_file_name)
-            print('Download complete')
+            logging.debug('Download complete')
         else:
-            print('Download cancelled')
+            logging.debug('Download cancelled')
             self.is_need_process = False
 
     def read_headers(self, in_line):
@@ -99,12 +101,11 @@ class ImportSystems(BaseClases.BaseCsv):
             POWER=in_dict['power'].strip('"'),
             POWER_STATE_ID=int(in_dict['power_state_id']),
             NEEDS_PERMIT = bool(in_dict['needs_permit']),
-
-        UPDATED_AT = Column(DateTime)
-        SIMBAD_REF = Column(String)
-        CONTROLLING_MIN_FACT_ID = Column(Integer)
-        RESERVE_TYPE_ID = Column(Integer)
-        NAME_UPPER = Column(String)
+            # UPDATED_AT=date(in_dict['updated_at']),
+            SIMBAD_REF=in_dict['simbad_ref'].strip('"'),
+            CONTROLLING_MIN_FACT_ID=int(in_dict['controlling_min_fact_id']),
+            RESERVE_TYPE_ID=int(in_dict['reserve_type_id']),
+            NAME_UPPER=in_dict['name_upper'].strip('"'),
 
         )
         Base.metadata.create_all(self.db)
@@ -116,7 +117,7 @@ class ImportSystems(BaseClases.BaseCsv):
         #     print('\r', end='', flush=True)
         self.completed_size += in_line_size
         progress = round(self.completed_size / self.file_size * 100, 6)
-        print(f'loaded {progress}%\r', end='', flush=True)
+        logging.debug(f'loaded {progress}%\r', end='', flush=True)
 
 
 if __name__ == '__main__':
@@ -131,7 +132,7 @@ if __name__ == '__main__':
             line  = iss.read_line()
             # print(line)
             iss.put_to_db(line)
-            print(f'{i} lines imported...', end='\r')
+            logging.debug(f'{i} lines imported...', end='\r')
             i += 1
 
 
